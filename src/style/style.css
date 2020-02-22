@@ -1,0 +1,36 @@
+.dialog{
+    border: 5px solid red;
+    height: 30px;
+}
+.dialog-line{
+    border: 5px solid green;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.secret-word{
+    border: 5px solid red;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+}
+.letter{
+    border: 5px solid green;
+    background: green;
+    margin:20px;
+    
+}
+.hangman{
+    border: 5px solid red;
+    height: 300px;
+}
+.btn{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    width: 25px;
+    height: 100%;
+    border-radius: 3px;
+    background: yellowgreen;
+}
