@@ -3,17 +3,19 @@ body{
     /* border: paleturquoise 3px solid; */
     background: rgb(40,40,40);
     color:whitesmoke;
-    display:flex;
+    display: -webkit-box; /*iOS 6-, Safari 3.1-6 */
+    display: -moz-box; /*Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox; /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    display: flex;
     flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
 }
 
-.dialog-space{
-    max-width:620px;
-    height: 30px;
-    /* border: 5px solid orange; */
-    width:100%
-}
 .hangman{
     display: flex;
     align-items: center;
@@ -28,17 +30,19 @@ body{
     display: flex;
     align-items:center;
     justify-content: center;
-    font-size: 30px;
+    font-size: 60px;
     letter-spacing: 6px;
     font-family: monospace;
     color: green;
     width: 100%;
+    margin-bottom: 25px;
+
 }
 .keyboard{
-    /* border: 5px solid red; */
+    border: 5px solid red;
     display: grid;
-    grid-template-columns: repeat(9,minmax(35px,50px));
-    grid-template-rows: repeat(3,minmax(30px,40px))  ;
+    grid-template-columns: repeat(9,minmax(35px,90px));
+    grid-template-rows: repeat(3,minmax(35px,90px))  ;
     justify-items: center;
     justify-content: center ;
 
@@ -46,34 +50,34 @@ body{
 
 
 .dialog{
-    /* border: 5px solid red; */
+    border: 5px solid red;
     text-align: center;
     justify-content: center;
+    font-size: 29px;
 }
 .selector{
     min-width: 25px;
     min-height: 25px;
     border-radius: 6px;
-}
-
-
-.letter{
-    /* border: 5px solid green; */
-    background: green;
-    margin:20px;
+    background: black;
+    color:yellowgreen;
+    font-size: 19px;
+    /* margin-left: 15px;
+    margin-right: 15px; */
     
 }
-
 
 .btn{
     display: flex;
     text-align: center;
     align-items: center;
     justify-content: center;
-    min-width: 25px;
-    max-height: 25px;
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 50px;
+    max-height: 50px;
     border-radius: 6px;
     background: yellowgreen;
-    
+    font-size: 19px;
 }
 
