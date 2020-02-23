@@ -87,9 +87,6 @@ function checkGuess(letter) {
         document.querySelector(`.man${badPoints}`).setAttribute('style','visibility:visible')
         openDialog()
         document.querySelector(".dialog").innerHTML = `bad points: ${badPoints}/10`;
-        setTimeout(() => {
-            closeDialog()
-        }, 2000); 
         checkForGameOver()
     } else {
         showSecretWord();
