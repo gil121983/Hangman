@@ -56,7 +56,6 @@ function selectCategory() {
         };
     }, 2000);
 };
-
 function closeDialog() {
     let dialogLine = document.querySelector('.dialog');
     dialogLine.setAttribute('style', 'display: none');
@@ -80,12 +79,17 @@ function createKeyboard() {
     document.querySelector('.keyboard').innerHTML = btns
 }
 function checkGuess(letter) {
-    const hangmanElement = document.querySelector(".hangman");
+    
     document.getElementById(letter.id).setAttribute('disabled', true)
     guessed.push(letter.id)
     if (!pickedWord.includes(letter.id)) {
         badPoints++;
-        hangmanElement.innerHTML = `bad points: ${badPoints}/10`;
+        document.querySelector(`.man${badPoints}`).setAttribute('style','visibility:visible')
+        openDialog()
+        document.querySelector(".dialog").innerHTML = `bad points: ${badPoints}/10`;
+        setTimeout(() => {
+            closeDialog()
+        }, 2000); 
         checkForGameOver()
     } else {
         showSecretWord();
@@ -103,10 +107,19 @@ function showSecretWord() {
     checkWin()
 };
 function checkForGameOver() {
-    const hangmanElement = document.querySelector(".hangman");
     if (badPoints === 10) {
-        hangmanElement.innerHTML = `GAME OVER!`;
+        document.querySelector("#eyes").innerHTML = ` x x `;
+        document.querySelector("#smile").innerHTML = ` ◠ `;
+        document.querySelector("#rope").setAttribute('style','height:55px')
+        document.querySelector(".secret-word").innerHTML = pickedWord;
+
+        openDialog()
+        document.querySelector(".dialog").innerHTML = `GAME OVER!`;
+        setTimeout(() => {
+            closeDialog()
+        }, 3000);
         resetGame()
+
     }
 };
 function checkWin() {
@@ -120,7 +133,13 @@ function checkWin() {
 };
 function resetGame() {
     setTimeout(() => {
-        document.querySelector(".hangman").innerHTML = ""
+        for(let i=1;i<10;i++){
+            document.querySelector(`.man${i}`).setAttribute('style','visibility:hidden')
+        }
+
+        document.querySelector("#eyes").innerHTML = `(0 0)`;
+        document.querySelector("#smile").innerHTML = ` ◠◡◠ `; 
+        document.querySelector("#rope").setAttribute('style','height:30px')
         document.querySelector(".secret-word").innerHTML = ""
 
         pickedWord = '';
@@ -128,7 +147,7 @@ function resetGame() {
         guessed = [];
         secretWord = null;
         render()
-    }, 3000);
+    }, 4000);
 }
 
 

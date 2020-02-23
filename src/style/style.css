@@ -1,13 +1,30 @@
+*{ box-sizing: border-box;}
 body{
+    /* border: paleturquoise 3px solid; */
     background: rgb(40,40,40);
-    color:whitesmoke
+    color:whitesmoke;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+.dialog-space{
+    max-width:620px;
+    height: 30px;
+    /* border: 5px solid orange; */
+    width:100%
+}
+.hangman{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    /* border: 5px solid red; */
+    max-width:430px;
+    height: 320px;
+}
 .secret-word{
     /* border: 5px solid red; */
-    position: absolute;
-        bottom: 35%;
-    height: 120px;
+    min-height:80px;
     display: flex;
     align-items:center;
     justify-content: center;
@@ -15,6 +32,28 @@ body{
     letter-spacing: 6px;
     font-family: monospace;
     color: green;
+    width: 100%;
+}
+.keyboard{
+    /* border: 5px solid red; */
+    display: grid;
+    grid-template-columns: repeat(9,minmax(35px,50px));
+    grid-template-rows: repeat(3,minmax(30px,40px))  ;
+    justify-items: center;
+    justify-content: center ;
+
+}
+
+
+.dialog{
+    /* border: 5px solid red; */
+    text-align: center;
+    justify-content: center;
+}
+.selector{
+    min-width: 25px;
+    min-height: 25px;
+    border-radius: 6px;
 }
 
 
@@ -24,30 +63,17 @@ body{
     margin:20px;
     
 }
-.dialog{
-    /* border: 5px solid red; */
-    text-align: center;
-}
+
+
 .btn{
     display: flex;
     text-align: center;
+    align-items: center;
     justify-content: center;
-    width: 25px;
-    height: 25px;
+    min-width: 25px;
+    max-height: 25px;
     border-radius: 6px;
     background: yellowgreen;
+    
 }
-.keyboard{
-    position: absolute;
-        bottom:13%;
-    display: grid;
-    grid-template-columns: repeat(9,35px);
-    grid-template-rows: repeat(2,auto)  ;
-    row-gap: 25px;
-    justify-items: center;
-    justify-content: center ;
-    height: auto
-}
-.selectr{
-    height: 20px;
-}
+
