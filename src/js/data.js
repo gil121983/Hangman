@@ -8,6 +8,7 @@ const words = [
     {id:"7", word:"inheritance",categoryId:"3"},
     {id:"8", word:"abstraction",categoryId:"3"},
     {id:"9", word:"encapsulation",categoryId:"3"},
+    {id:"4", word:"fcgdaebbeadgcf",categoryId:"4"},
 ];
 
 const categories = [
