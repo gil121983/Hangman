@@ -1,108 +1,133 @@
+let pickedWord = '';
+let badPoints = 0;
+let guessed = [];
+let secretWord = null;
 init()
 
 function init() {
-    
+
     render()
-};
-
-function render() {
-    const caId = 0;
-    sayHello()
-    setTimeout(()=>setNewGame(),2000)
-    
-};
-
-function setNewGame() {
-    const output=0;
-    const dialogBox = document.querySelector(".dialog")
-    const dialogLine = document.createElement('div')
-    dialogLine.className = 'dialog-line'
-    dialogLine.setAttribute('style', 'display:flex')
-    dialogLine.innerHTML = `Selecet category: `;
-
-    const categorySelector = document.createElement('select')
-    categorySelector.className = 'selector';
-    categories.forEach(element => {
-        let option = document.createElement('option')
-        option.value = element.categoryId;
-        option.text = element.name;
-        categorySelector.appendChild(option)
-    });
-    const okBtn = document.createElement('div')
-    okBtn.innerText = 'Ok';
-    okBtn.className = 'btn';
-
-    dialogLine.appendChild(categorySelector)
-    dialogLine.appendChild(okBtn)
-    dialogBox.appendChild(dialogLine)
-
-    okBtn.onclick = function () {
-        dialogLine.setAttribute('style', 'display:none')        
-        pickRandomWord(categorySelector.value)
-        startGame()
-    };
-};
-
-function pickRandomWord(CatId) {
-    const wordDiv = document.querySelector('.secret-word')
-    
-    const catWords = words.filter(item => item.categoryId == CatId)
-    const randomWord = getRandomItem(catWords) 
-    const wordArray = randomWord.word.split("")
-    wordArray.forEach(item=>{
-        let letter = document.createElement('div')
-        letter.innerText = '_';
-        letter.className = 'letter'
-        wordDiv.appendChild(letter)
-    })
-    // const secretWord = document.createElement('div')
-    // secretWord.innerHTML = randomWord.word;
-    return wordDiv
-};
-
-
-
-function startGame() {
-    const dialogBox = document.querySelector(".dialog")
-    const dialogLine = document.createElement('div')
-    dialogLine.setAttribute('style', 'display:flex')
-    dialogLine.className = 'dialog-line'
-
-
-    const inputElement = document.createElement('input')
-    inputElement.placeholder = `Guess a letter : `;
-
-    const guessBtn = document.createElement('button')
-    guessBtn.innerText = 'Try';
-
-    dialogLine.appendChild(inputElement)
-    dialogLine.appendChild(guessBtn)
-    dialogBox.appendChild(dialogLine)
-
 }
 
-
-
-
-
-
-function closeDialog() {
-    let dialogElement = document.querySelector('.dialog-line');
-    dialogElement.setAttribute('style', 'display: none');
-};
-
+function render() {
+    sayHello()
+    selectCategory()
+}
+function startGame() {
+    pickRandomWord()
+    createKeyboard()
+    showSecretWord()
+}
 function sayHello() {
-    const dialogBox = document.querySelector(".dialog")
-    const helloMsg = document.createElement('div')
-    helloMsg.setAttribute('style', 'display:flex')
-    helloMsg.innerHTML = `Welcome to Hang-Man game`;
-    helloMsg.className = 'dialog-line';
-    dialogBox.appendChild(helloMsg)
+    openDialog()
+    document.querySelector(".dialog").innerHTML = `Welcome to HangMan game`;
     setTimeout(() => {
         closeDialog()
     }, 2000);
 }
+function selectCategory() {
+    setTimeout(() => {
+        openDialog()
+        let dialog = document.querySelector(".dialog")
+        dialog.innerHTML = `Selecet category: `;
 
-function getRandomItem(array){
-    return array[Math.floor(Math.random()*array.length)];
+        //this will create a select with category options
+        const categorySelector = document.createElement('select')
+        categorySelector.className = 'selector';
+        categories.forEach(element => {
+            let option = document.createElement('option')
+            option.value = element.categoryId;
+            option.text = element.name;
+            categorySelector.appendChild(option)
+        });
+
+        const okBtn = document.createElement('div')
+        okBtn.innerText = 'Ok';
+        okBtn.className = 'btn';
+
+        dialog.appendChild(categorySelector)
+        dialog.appendChild(okBtn)
+
+
+        okBtn.onclick = function () {
+            closeDialog()
+            startGame(categorySelector.value)
+        };
+    }, 2000);
+};
+
+function closeDialog() {
+    let dialogLine = document.querySelector('.dialog');
+    dialogLine.setAttribute('style', 'display: none');
+};
+function openDialog() {
+    let dialogLine = document.querySelector('.dialog');
+    dialogLine.setAttribute('style', 'display: flex');
+};
+function pickRandomWord(catId = 4) {
+    let categoryWords = words.filter(item => item.categoryId == catId)
+    pickedWord = getRandomItem(categoryWords).word;
+};
+function getRandomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
 }
+function createKeyboard() {
+    let btns = 'abcdefghijklmnoprstuvwxyz'.split('').map(letter =>
+        `<button class="btn" id="${letter}" 
+    onclick="checkGuess(${letter})">
+    ${letter}</button>`).join('');
+    document.querySelector('.keyboard').innerHTML = btns
+}
+function checkGuess(letter) {
+    const hangmanElement = document.querySelector(".hangman");
+    document.getElementById(letter.id).setAttribute('disabled', true)
+    guessed.push(letter.id)
+    if (!pickedWord.includes(letter.id)) {
+        badPoints++;
+        hangmanElement.innerHTML = `bad points: ${badPoints}/10`;
+        checkForGameOver()
+    } else {
+        showSecretWord();
+    };
+};
+function showSecretWord() {
+    secretWord = pickedWord.split("").map(letter => {
+        if (guessed.indexOf(letter) >= 0)
+            return letter;
+        else
+            return "_";
+    }).join("");
+    document.querySelector(".secret-word").innerHTML = secretWord;
+
+    checkWin()
+};
+function checkForGameOver() {
+    const hangmanElement = document.querySelector(".hangman");
+    if (badPoints === 10) {
+        hangmanElement.innerHTML = `GAME OVER!`;
+        resetGame()
+    }
+};
+function checkWin() {
+    const underLines = secretWord.indexOf("_");
+    if (underLines === -1) {
+        openDialog()
+        document.querySelector(".dialog").innerHTML = "YOU WIN!!!"
+        resetGame()
+
+    }
+};
+function resetGame() {
+    setTimeout(() => {
+        document.querySelector(".hangman").innerHTML = ""
+        document.querySelector(".secret-word").innerHTML = ""
+
+        pickedWord = '';
+        badPoints = 0;
+        guessed = [];
+        secretWord = null;
+        render()
+    }, 3000);
+}
+
+

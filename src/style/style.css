@@ -1,36 +1,53 @@
-.dialog{
-    border: 5px solid red;
-    height: 30px;
+body{
+    background: rgb(40,40,40);
+    color:whitesmoke
 }
-.dialog-line{
-    border: 5px solid green;
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
+
 .secret-word{
-    border: 5px solid red;
-    height: 30px;
+    /* border: 5px solid red; */
+    position: absolute;
+        bottom: 35%;
+    height: 120px;
     display: flex;
+    align-items:center;
     justify-content: center;
-    align-items:center ;
+    font-size: 30px;
+    letter-spacing: 6px;
+    font-family: monospace;
+    color: green;
 }
+
+
 .letter{
-    border: 5px solid green;
+    /* border: 5px solid green; */
     background: green;
     margin:20px;
     
 }
-.hangman{
-    border: 5px solid red;
-    height: 300px;
+.dialog{
+    /* border: 5px solid red; */
+    text-align: center;
 }
 .btn{
     display: flex;
     text-align: center;
     justify-content: center;
     width: 25px;
-    height: 100%;
-    border-radius: 3px;
+    height: 25px;
+    border-radius: 6px;
     background: yellowgreen;
+}
+.keyboard{
+    position: absolute;
+        bottom:13%;
+    display: grid;
+    grid-template-columns: repeat(9,35px);
+    grid-template-rows: repeat(2,auto)  ;
+    row-gap: 25px;
+    justify-items: center;
+    justify-content: center ;
+    height: auto
+}
+.selectr{
+    height: 20px;
 }
