@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="src/style/style.css">
+    <link rel="stylesheet" href="src/style/man.css">
 </head>
+
 <body>
 
-    <div class="dialog"></div> 
-    <div class="hangman"></div>
+    <div class="dialog-space">
+        <div class="dialog"></div>
+    </div>
+
+    <div class="hangman">
+        <img src="src/img/img1.png" style="width:480px">
+        <div class="man-container">
+            <div class="man man1" id="rope"></div>
+            <div class="man man2" id="head">
+                <div class="man-head man3" id="eyes">(O O)</div>
+                <div class="man-head man4" id="smile">◠◡◠</div>
+            </div>
+            <div class="hands">
+                <div class="man man5" id="l-hand"></div>
+                <div class="man man6" id="body"></div>
+                <div class="man man7" id="r-hand"></div>
+            </div>
+            <div class="legs">
+                <div class="man man8" id="r-foot"></div>
+                <div class="man man9" id="l-foot"></div>
+            </div>
+            <div class="man man10" id="dead"></div>
+        </div>
+    </div>
+
     <div class="secret-word"></div>
+
     <div class="keyboard"></div>
 
     <script src="src/js/data.js"></script>
     <script src="src/js/main.js"></script>
 
 </body>
+
 </html>
