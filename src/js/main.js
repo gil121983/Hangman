@@ -1,3 +1,4 @@
+let selectedCategoryId=0
 let pickedWord = '';
 let badPoints = 0;
 let guessed = [];
@@ -13,8 +14,8 @@ function render() {
     sayHello()
     selectCategory()
 }
-function startGame() {
-    pickRandomWord()
+function startGame(selectedCategory) {
+    pickRandomWord(selectedCategory)
     createKeyboard()
     showSecretWord()
 }
@@ -64,7 +65,7 @@ function openDialog() {
     let dialogLine = document.querySelector('.dialog');
     dialogLine.setAttribute('style', 'display: flex');
 };
-function pickRandomWord(catId = 4) {
+function pickRandomWord(catId) {
     let categoryWords = words.filter(item => item.categoryId == catId)
     pickedWord = getRandomItem(categoryWords).word;
 };
