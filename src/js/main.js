@@ -3,10 +3,10 @@ let pickedWord = '';
 let badPoints = 0;
 let guessed = [];
 let secretWord = null;
+
 init()
 
 function init() {
-
     render()
 }
 
@@ -14,6 +14,7 @@ function render() {
     sayHello()
     selectCategory()
 }
+
 function startGame(selectedCategory) {
     pickRandomWord(selectedCategory)
     createKeyboard()
@@ -48,8 +49,8 @@ function selectCategory() {
         });
 
         const okBtn = document.createElement('div')
-        okBtn.innerText = 'Ok';
-        okBtn.className = 'btn';
+        okBtn.innerHTML = ` Ok `;
+        okBtn.className = 'btn ok-btn';
 
         dialog.appendChild(categorySelector)
         dialog.appendChild(okBtn)
@@ -83,6 +84,17 @@ function pickRandomWord(catId) {
 function getRandomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
+function showSecretWord() {
+    secretWord = pickedWord.split("").map(letter => {
+        if (guessed.indexOf(letter) >= 0)
+            return letter;
+        else
+            return "_";
+    }).join("");
+    document.querySelector(".secret-word").innerHTML = secretWord;
+
+    checkWin()
+};
 function createKeyboard() {
     let btns = 'abcdefghijklmnoprstuvwxyz'.split('').map(letter =>
         `<button class="btn" id="${letter}" 
@@ -103,17 +115,6 @@ function checkGuess(letter) {
     } else {
         showSecretWord();
     };
-};
-function showSecretWord() {
-    secretWord = pickedWord.split("").map(letter => {
-        if (guessed.indexOf(letter) >= 0)
-            return letter;
-        else
-            return "_";
-    }).join("");
-    document.querySelector(".secret-word").innerHTML = secretWord;
-
-    checkWin()
 };
 function checkForGameOver() {
     if (badPoints === 10) {
@@ -150,6 +151,7 @@ function resetGame() {
         document.querySelector("#smile").innerHTML = ` ◠◡◠ `; 
         document.querySelector("#rope").setAttribute('style','height:30px')
         document.querySelector(".secret-word").innerHTML = ""
+        document.querySelector('.keyboard').innerHTML = ""
         pickedWord = '';
         badPoints = 0;
         guessed = [];
