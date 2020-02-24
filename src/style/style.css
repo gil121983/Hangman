@@ -24,7 +24,7 @@ body{
     margin-bottom: 15px;
 }
 .secret-word-place{
-    border: 5px solid red; 
+    /* border: 5px solid red;  */
     width:320px;
     height: 60px;
 }
@@ -44,20 +44,16 @@ body{
 }
 .keyboard{
     /* border: 5px solid red; */
-    display: grid;
 
+    display: grid;
     grid-template-columns: repeat(9,minmax(32px,90px));
     grid-template-rows: repeat(3,minmax(32px,90px))  ;
-    
-    /* justify-items: center; */
-    /* justify-content: center ; */
-
 }
 
 
 .dialog{
     position: relative;
-    top: -344px;
+    top: -360px;
     left:0%;
     /* border: 5px solid red; */
     text-align: center;
@@ -84,11 +80,11 @@ body{
     text-align: center;
     align-items: center;
     justify-content: center;
-    min-width: 25px;
-    min-height: 25px;
+    min-width: 15px;
     max-width: 50px;
+    min-height: 15px;
     max-height: 50px;
-    margin: 2px;
+    margin: 5px;
     border-radius: 6px;
     background: yellowgreen;
     font-size: 19px;
@@ -98,3 +94,9 @@ body{
     width:40px;
 }
 
+@media(max-width:390px){
+    .keyboard{
+        grid-template-columns: repeat(9,minmax(15px,40px));
+        grid-template-rows: repeat(3,minmax(15px,40px))  ;
+    }
+}
