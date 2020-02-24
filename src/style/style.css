@@ -1,70 +1,81 @@
-*{ box-sizing: border-box;}
+*{  
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 body{
     /* border: paleturquoise 3px solid; */
     background: rgb(40,40,40);
     color:whitesmoke;
-    display: -webkit-box; /*iOS 6-, Safari 3.1-6 */
-    display: -moz-box; /*Firefox 19- (buggy but mostly works) */
-    display: -ms-flexbox; /* TWEENER - IE 10 */
-    display: -webkit-flex;
+
     display: flex;
+
     flex-direction: column;
-    -webkit-box-align: center;
-    -webkit-flex-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
 }
 
 .hangman{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-items: center;
     /* border: 5px solid red; */
-    max-width:430px;
-    height: 320px;
+    width:570px;
+    height: 360px;
+    margin-bottom: 15px;
+}
+.secret-word-place{
+    /* border: 5px solid red;  */
+    height: 60px;
 }
 .secret-word{
     /* border: 5px solid red; */
-    min-height:80px;
+    min-height:0px;
     display: flex;
     align-items:center;
     justify-content: center;
-    font-size: 60px;
+    font-size: 35px;
     letter-spacing: 6px;
     font-family: monospace;
     color: green;
     width: 100%;
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
 
 }
 .keyboard{
-    border: 5px solid red;
+    /* border: 5px solid red; */
     display: grid;
-    grid-template-columns: repeat(9,minmax(35px,90px));
-    grid-template-rows: repeat(3,minmax(35px,90px))  ;
-    justify-items: center;
-    justify-content: center ;
+
+    grid-template-columns: repeat(9,minmax(32px,90px));
+    grid-template-rows: repeat(3,minmax(32px,90px))  ;
+    
+    /* justify-items: center; */
+    /* justify-content: center ; */
 
 }
 
 
 .dialog{
-    border: 5px solid red;
+    position: relative;
+    top: -333px;
+    left:0%;
+    /* border: 5px solid red; */
     text-align: center;
     justify-content: center;
-    font-size: 29px;
+    font-size: 24px;
+    width:100%;
+    color: yellowgreen;
 }
 .selector{
+    transition: 0.3s;
+    border:2px solid rgb(40,40,40);
     min-width: 25px;
     min-height: 25px;
     border-radius: 6px;
     background: black;
     color:yellowgreen;
     font-size: 19px;
-    /* margin-left: 15px;
-    margin-right: 15px; */
-    
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .btn{
@@ -72,12 +83,15 @@ body{
     text-align: center;
     align-items: center;
     justify-content: center;
-    min-width: 30px;
-    min-height: 30px;
+    min-width: 25px;
+    min-height: 25px;
     max-width: 50px;
     max-height: 50px;
+    margin: 2px;
     border-radius: 6px;
     background: yellowgreen;
+ 
+
     font-size: 19px;
 }
 

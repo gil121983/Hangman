@@ -30,11 +30,16 @@ function selectCategory() {
     setTimeout(() => {
         openDialog()
         let dialog = document.querySelector(".dialog")
-        dialog.innerHTML = `Selecet category: `;
+        dialog.innerHTML = ``;
 
         //this will create a select with category options
         const categorySelector = document.createElement('select')
         categorySelector.className = 'selector';
+        let defaultOpt = document.createElement('option')
+        defaultOpt.text = 'Selecet a category';
+        defaultOpt.value = 0;
+
+        categorySelector.appendChild(defaultOpt)
         categories.forEach(element => {
             let option = document.createElement('option')
             option.value = element.categoryId;
@@ -51,8 +56,15 @@ function selectCategory() {
 
 
         okBtn.onclick = function () {
+            if(categorySelector.value>0){
             closeDialog()
             startGame(categorySelector.value)
+            }else{
+                categorySelector.setAttribute('style','background:red')
+                setTimeout(() => {
+                    categorySelector.removeAttribute('style','background:black')
+                },500);
+            }
         };
     }, 2000);
 };
@@ -133,18 +145,19 @@ function resetGame() {
         for(let i=1;i<10;i++){
             document.querySelector(`.man${i}`).setAttribute('style','visibility:hidden')
         }
-
+        setTimeout(() => {
         document.querySelector("#eyes").innerHTML = `(0 0)`;
         document.querySelector("#smile").innerHTML = ` ◠◡◠ `; 
         document.querySelector("#rope").setAttribute('style','height:30px')
         document.querySelector(".secret-word").innerHTML = ""
-
         pickedWord = '';
         badPoints = 0;
         guessed = [];
         secretWord = null;
-        render()
-    }, 4000);
+        render() 
+        }, 1000);
+
+    }, 3000);
 }
 
 
