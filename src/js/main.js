@@ -23,9 +23,7 @@ function startGame(selectedCategory) {
 function sayHello() {
     openDialog()
     document.querySelector(".dialog").innerHTML = `Welcome to HangMan game`;
-    setTimeout(() => {
-        closeDialog()
-    }, 2000);
+        closeDialog(2000)
 }
 function selectCategory() {
     setTimeout(() => {
@@ -33,13 +31,13 @@ function selectCategory() {
         let dialog = document.querySelector(".dialog")
         dialog.innerHTML = ``;
 
-        //this will create a select with category options
+        // this will create a select with category options
         const categorySelector = document.createElement('select')
         categorySelector.className = 'selector';
         let defaultOpt = document.createElement('option')
         defaultOpt.text = 'Selecet a category';
         defaultOpt.value = 0;
-
+        // this will create a default opttion and feed the categories to selctor  
         categorySelector.appendChild(defaultOpt)
         categories.forEach(element => {
             let option = document.createElement('option')
@@ -55,7 +53,6 @@ function selectCategory() {
         dialog.appendChild(categorySelector)
         dialog.appendChild(okBtn)
 
-
         okBtn.onclick = function () {
             if(categorySelector.value>0){
             closeDialog()
@@ -69,13 +66,14 @@ function selectCategory() {
         };
     }, 2000);
 };
-function closeDialog() {
-    let dialogLine = document.querySelector('.dialog');
-    dialogLine.setAttribute('style', 'display: none');
+function closeDialog(timeout) {
+    setTimeout(() => {
+        let dialogLine = document.querySelector('.dialog');
+        dialogLine.setAttribute('style', 'display: none');       
+    }, timeout);
 };
 function openDialog() {
-    let dialogLine = document.querySelector('.dialog');
-    dialogLine.setAttribute('style', 'display: flex');
+    document.querySelector('.dialog').setAttribute('style', 'display: flex');
 };
 function pickRandomWord(catId) {
     let categoryWords = words.filter(item => item.categoryId == catId)
@@ -86,18 +84,14 @@ function getRandomItem(array) {
 }
 function showSecretWord() {
     secretWord = pickedWord.split("").map(letter => {
-        if (guessed.indexOf(letter) >= 0)
-            return letter;
-        else
-            return "_";
-    }).join("");
+        return(guessed.indexOf(letter) >= 0)?letter:"_"}).join("");
     document.querySelector(".secret-word").innerHTML = secretWord;
 
     checkWin()
 };
 function createKeyboard() {
     let btns = 'abcdefghijklmnoprstuvwxyz'.split('').map(letter =>
-        `<button class="btn" id="${letter}" 
+    `<button class="btn" id="${letter}" 
     onclick="checkGuess(${letter})">
     ${letter}</button>`).join('');
     document.querySelector('.keyboard').innerHTML = btns
@@ -125,11 +119,8 @@ function checkForGameOver() {
 
         openDialog()
         document.querySelector(".dialog").innerHTML = `GAME OVER!`;
-        setTimeout(() => {
-            closeDialog()
-        }, 3000);
+        closeDialog(3000)
         resetGame()
-
     }
 };
 function checkWin() {
@@ -138,7 +129,6 @@ function checkWin() {
         openDialog()
         document.querySelector(".dialog").innerHTML = "YOU WIN!!!"
         resetGame()
-
     }
 };
 function resetGame() {
@@ -146,7 +136,7 @@ function resetGame() {
         for(let i=1;i<10;i++){
             document.querySelector(`.man${i}`).setAttribute('style','visibility:hidden')
         }
-        setTimeout(() => {
+
         document.querySelector("#eyes").innerHTML = `(0 0)`;
         document.querySelector("#smile").innerHTML = ` ◠◡◠ `; 
         document.querySelector("#rope").setAttribute('style','height:30px')
@@ -156,10 +146,7 @@ function resetGame() {
         badPoints = 0;
         guessed = [];
         secretWord = null;
-        render() 
-        }, 1000);
-
     }, 3000);
+
+    setTimeout(() => {render()}, 4000);
 }
-
-
