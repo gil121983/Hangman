@@ -61,9 +61,10 @@ body{
     font-size: 24px;
     width:100%;
     color: yellowgreen;
+    transition: 0.3s ease;
 }
 .selector{
-    transition: 0.3s;
+    transition: 0.6s;
     border:2px solid rgb(40,40,40);
     min-width: 25px;
     min-height: 25px;
